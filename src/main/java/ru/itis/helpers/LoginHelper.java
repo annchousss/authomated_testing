@@ -1,10 +1,18 @@
+package ru.itis.helpers;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import ru.itis.ApplicationManager;
 
 import java.util.concurrent.TimeUnit;
 
 public class LoginHelper extends HelperBase {
-    void login(String userName, String pass) {
+
+    public LoginHelper(ApplicationManager applicationManager) {
+        super(applicationManager);
+    }
+
+    public void login(String userName, String pass) {
         driver.findElement(By.linkText("Войти")).click();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         WebElement username = driver.findElement(By.name("vb_login_username"));
@@ -15,7 +23,7 @@ public class LoginHelper extends HelperBase {
         logIn.click();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
-    void logout() {
+    public void logout() {
         driver.findElement(By.linkText("Выход")).click();
         driver.switchTo().alert().accept();
     }

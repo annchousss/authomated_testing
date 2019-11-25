@@ -1,3 +1,5 @@
+package ru.itis.model;
+
 public class AccountData {
 
     private String username;
