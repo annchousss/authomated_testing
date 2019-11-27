@@ -13,6 +13,7 @@ public class ApplicationManager {
     private LoginHelper auth;
     private NavigationHelper navigation;
     private NotepadHelper notepad;
+    private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
 
     public ApplicationManager() {
         this.driver = new ChromeDriver();
@@ -41,5 +42,9 @@ public class ApplicationManager {
     public NotepadHelper getNotepad() {
         return notepad;
     }
+
+//    public void closeBrowser(){
+//        driver.quit();
+//    }
 
 }
