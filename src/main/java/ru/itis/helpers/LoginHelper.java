@@ -21,9 +21,10 @@ public class LoginHelper extends HelperBase {
         password.sendKeys(pass);
         WebElement logIn = driver.findElement(By.cssSelector("input[value='Вход']"));
         logIn.click();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
     public void logout() {
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.findElement(By.linkText("Выход")).click();
         driver.switchTo().alert().accept();
     }

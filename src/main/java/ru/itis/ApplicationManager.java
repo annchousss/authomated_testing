@@ -13,7 +13,7 @@ public class ApplicationManager {
     private LoginHelper auth;
     private NavigationHelper navigation;
     private NotepadHelper notepad;
-    private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
+
 
     public ApplicationManager() {
         this.driver = new ChromeDriver();
@@ -25,6 +25,20 @@ public class ApplicationManager {
 
     public WebDriver getDriver() {
         return driver;
+    }
+
+    private static ThreadLocal<ApplicationManager> app;
+
+    public static ApplicationManager getInstance(){
+        synchronized (ApplicationManager.class){
+            if (app == null){
+                app = new ThreadLocal<ApplicationManager>();
+                ApplicationManager newInstance = new ApplicationManager();
+                newInstance.getNavigation().openHomePage();
+                app.set(newInstance);
+            }
+            return app.get();
+        }
     }
 
     public String getBaseURL() {
@@ -43,8 +57,8 @@ public class ApplicationManager {
         return notepad;
     }
 
-//    public void closeBrowser(){
-//        driver.quit();
-//    }
+    public void closeBrowser(){
+        driver.quit();
+    }
 
 }
